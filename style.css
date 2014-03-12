@@ -1,0 +1,95 @@
+body
+{
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+	font-family: arial;
+}
+
+#wrapper
+{
+	width: 700px;
+	margin: 150px auto 100px;
+	text-align: center;
+}
+
+input, select, #runtime
+{
+	padding: 4px 8px;
+	margin: 18px auto;
+	background-color: #eb47a0;
+	border: 2px solid #777;
+	color: #fff;
+	font-size: 30px;
+	font-weight: 800;
+	text-align: center;
+	display: block;
+	width: 100%;
+}
+
+
+#runtime {
+display: inline;
+font-size: 30px;
+background-color: #000;
+
+}
+
+#play
+{
+	background-color: #2f7bef;
+	width: 100px;
+	display: inline;
+	cursor:pointer;
+}
+
+#cbox {
+	display: inline;
+	width: 20px;
+}
+
+#snum {
+	width: 80px;
+	display: inline;
+
+}
+
+#inter {
+	width: 100px;
+	display: inline;
+}
+
+#pgo {
+	font-size: 14px;
+	background-color: #ededed;
+	color: #333;
+	text-align:left;
+
+}
+
+
+p
+{
+	font-size: 20px;
+	line-height: 24px;
+	text-align: left;
+	color: #666;
+}
+
+.credit
+{
+	font-size: 13px;
+	text-align: center;
+	margin-top: 80px;
+}
+
+a, a:link, a:visited
+{
+	color: #666;
+	text-decoration: none;
+	font-weight:bold; 
+	border-bottom: 1px dotted #666;
+	
+}
+
+a:hover { color: #eb47a0; font-weight:bold; border-bottom: 1px dotted #eb47a0; }
