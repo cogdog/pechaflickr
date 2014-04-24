@@ -108,8 +108,9 @@
 <li>04.26.2012 - [v 0.5] Bunch o' fixes. Fixed problem of the mystery white box (we were running out of images due to a bad test condition). Improved the randomness by using 1 of six ordering schemes for fetching photos (by date posted, by date taken, by interestingness, and each of these either ascending or descending). Also, to improve variety set up photo selection to not include more than one photo posted by the same person. Lastly, we now check for a lack of sufficient numbers of photos found, e.g. for obscure tags, or ones with not enough photos to give good randomness (specified by 4 times the number requested)</li>
 <li>05.29.2012 - [v 0.51] Put all advanced options in toggle open div for main page, added check box option to allow for photos from same owner.</li>
 <li>01.17.2013 - [v 0.53] New field generated under advanced options to save the settings as a URL, e.g. so another show can be generated with same settings. Also corrected previous version which was not passing the unique owner checkbox option to the script, whoops.</li>
-<li>03.06.2014 - Now equipped with a credits screen at end of a round that lists and displays thumbnails of all images used (see <a href="http://cogdogblog.com/2014/03/06/pechaflickr-super-powers/">http://cogdogblog.com/2014/03/06/pechaflickr-super-powers/</a>)</li>
+<li>03.06.2014 - [v 1.0] Now equipped with a credits screen at end of a round that lists and displays thumbnails of all images used (see <a href="http://cogdogblog.com/2014/03/06/pechaflickr-super-powers/">http://cogdogblog.com/2014/03/06/pechaflickr-super-powers/</a>)</li>
 <li>03.12.2014 - moving the code archive to github cause that's where the cool kids are.</li>
+<li>04,22,2014 - bought time we had our own domain <a href="http://pechaflickr.net/">pechaflickr.net</a></li>
 
 </ul> 
 
@@ -118,8 +119,8 @@
 <input type="submit" id="play" value="Go Play" />
 </form>
 
-<p class="credit"><a href="http://pechaflickr.cogdogblog.com/">pechaflickr.cogdogblog.com</a><br />pechaflickr is a cogdog production<br />
-<a href="http://cogdogblog.com/">cogdogblog.com</a> •  <a href="http://twitter.com/cogdog">@cogdog</a>
+<p class="credit"><a href="http://pechaflickr.net/">pechaflickr.net</a><br />pechaflickr is a cogdog production<br />
+<a href="http://cogdog.info">http://cogdog.info</a> •  <a href="http://twitter.com/cogdog">@cogdog</a>
 </div>
 
 

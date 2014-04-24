@@ -132,8 +132,8 @@ pecha share<br />
 
 <p>Curious? <a href="http://cogdogblog.com/stuff/techtalks13/">I used pechaflickr to talk about pechaflickr.</a> If you are making use of this, <a href="http://bit.ly/pechaflickr-survey">please share with me</a>!</p>
 
-<p class="credit"><a href="http://pechaflickr.cogdogblog.com/">pechaflickr.cogdogblog.com</a> • <a href="notes.php">notes 'n stuff for geeks</a><br />pechaflickr is a cogdog production<br />
-<a href="http://cogdogblog.com/">cogdogblog.com</a> •  <a href="http://twitter.com/cogdog">@cogdog</a>
+<p class="credit"><a href="http://pechaflickr.net/">pechaflickr.net</a> • <a href="notes.php">notes 'n stuff for geeks</a><br />pechaflickr is a cogdog production<br />
+<a href="http://cogdog.info/">cogdog.info</a> •  <a href="http://twitter.com/cogdog">@cogdog</a>
 </div>
 
 <?php include 'footer.php'?>

@@ -4,7 +4,7 @@ Pecha Flickr: pecha.php
 version 0.53 (January 17, 2011)
 
 by Alan Levine, cogdogblog@gmail.com
-see it at http://pechaflickr.cogdogblog.com/
+see it at http://pechaflickr.net/
 
 This script generates the actual slide show using the jQuery cycle plugin
 http://jquery.malsup.com/cycle/
@@ -239,7 +239,7 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 	</div>
 	
 	<div id="logo">
-		<a href="http://pechaflickr.cogdogblog.com/" target="_pecha"><img src="images/pecha-flickr-bk.png" alt="pecha-flickr-bk" alt="pechaflickr" width="120" height="26" /></a>
+		<a href="http://pechaflickr.net/" target="_pecha"><img src="images/pecha-flickr-bk.png" alt="pecha-flickr-bk" alt="pechaflickr" width="120" height="26" /></a>
 	</div>
 	
 	
@@ -261,7 +261,7 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 
 
 <!-- our lovely logo -->	
-<div id="logo"><a href="http://pechaflickr.cogdogblog.com/" target="_pecha"><img src="images/pecha-flickr-bk.png" alt="pecha-flickr-bk" alt="pechaflickr" width="120" height="26" /></a></div>
+<div id="logo"><a href="http://pechaflickr.net/" target="_pecha"><img src="images/pecha-flickr-bk.png" alt="pecha-flickr-bk" alt="pechaflickr" width="120" height="26" /></a></div>
 
 <!-- holder for the slide counter -->
 <div id="caption"></div>
@@ -274,7 +274,7 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 <div id="marquee">
 <h1>Your <span class="pf">pecha<span class="blue">flick</span><span class="pink">r</span></span> Experience</h1>
 <p>Congratulations! You improvised a story based on <strong><?php echo $slidecount?></strong> random flickr photos tagged <strong><?php echo $flickr_tag?></strong> displayed every <strong><?php echo $interval?></strong> seconds, using the following images. <br />
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://pechaflickr.cogdogblog.com/index.php?t=<?php echo $flickr_tag?>&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random flickr images tagged &quot;<?php echo $flickr_tag?>&quot;" data-via="cogdog" data-size="large">Tweet</a>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://pechaflickr.net/index.php?t=<?php echo $flickr_tag?>&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random flickr images tagged &quot;<?php echo $flickr_tag?>&quot;" data-via="cogdog" data-size="large">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
 </p>
