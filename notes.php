@@ -77,6 +77,7 @@
 		
 		a:hover { color: #eb47a0; }
 </style>
+
 </head>
 <body>
 
@@ -110,7 +111,8 @@
 <li>01.17.2013 - [v 0.53] New field generated under advanced options to save the settings as a URL, e.g. so another show can be generated with same settings. Also corrected previous version which was not passing the unique owner checkbox option to the script, whoops.</li>
 <li>03.06.2014 - [v 1.0] Now equipped with a credits screen at end of a round that lists and displays thumbnails of all images used (see <a href="http://cogdogblog.com/2014/03/06/pechaflickr-super-powers/">http://cogdogblog.com/2014/03/06/pechaflickr-super-powers/</a>)</li>
 <li>03.12.2014 - moving the code archive to github cause that's where the cool kids are.</li>
-<li>04,22,2014 - bought time we had our own domain <a href="http://pechaflickr.net/">pechaflickr.net</a></li>
+<li>04.22.2014 - about time we had our own domain <a href="http://pechaflickr.net/">pechaflickr.net</a></li>
+<li>08.23.2015 - implemented <a href="http://vegas.jaysalvat.com/" target="_blank">vegas background slide show library</a> for full screen and responsive display of images, moved status to bottom of screen</li>
 
 </ul> 
 

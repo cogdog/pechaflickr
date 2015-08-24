@@ -12,7 +12,10 @@ $cbox =  ( !isset ( $_GET['u'] ) or $_GET['u'] == 1 ) ? 'checked="checked"' : ''
 	<meta charset="utf-8" />
 	<title>pechaflickr</title>
 	
-	<script src="js/jquery-1.7.2.min.js"></script>	<link rel="stylesheet" href="style.css" media="screen">
+	<!--  get some jQuery  -->
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="css/style.css" media="screen">
 	
 	<script>
 	$(document).ready(function(){
@@ -128,9 +131,15 @@ pecha share<br />
 
 <p>Can you improv a coherent presentation from images you have never seen?</p>
 
-<p> Enter a tag, and see how well you can communicate sense of 20 random flickr photos, each one on screen for 20 seconds. Advanced options offer  different settings.</p>
+<p>Enter a tag, press play, and see how well you can communicate a coherent message illustrated by 20 random photos, each one on screen for 20 seconds. Advanced options let you change the number of images and/or the timing.</p>
 
 <p>Curious? <a href="http://cogdogblog.com/stuff/techtalks13/">I used pechaflickr to talk about pechaflickr.</a> If you are making use of this, <a href="http://bit.ly/pechaflickr-survey">please share with me</a>!</p>
+
+<div class="aligncenter">
+<a class="twitter-timeline" data-dnt="true" width="700" data-tweet-limit="20"  href="https://twitter.com/search?q=pechaflickr" data-widget-id="598707891965571073">Tweets about pechaflickr</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+
 
 <p class="credit"><a href="http://pechaflickr.net/">pechaflickr.net</a> • <a href="notes.php">notes 'n stuff for geeks</a><br />pechaflickr is a cogdog production<br />
 <a href="http://cogdog.info/">cogdog.info</a> •  <a href="http://twitter.com/cogdog">@cogdog</a>

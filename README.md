@@ -2,13 +2,20 @@ pechaflickr
 =========================
 by Alan Levine http://cogdog.info/
 
+![pechaflickr](images/pecha-flickr.jpg)
+
 ABOUT
 -----
 Install your own version of the fun family game that mashes up pecha flickr, powerpoint karoke, with random flickr photos-- seen at http://pechaflickr.net/
 
 Requirements
 ------------
-You will need PHP and to get a flickr API key.
+You will need PHP and a flickr API key.
+
+Uses / Included
+------------
+* Vegas Background Slide Show Library http://vegas.jaysalvat.com/
+* phpFlickr 3.1 http://phpflickr.com/
 
 Setting Up
 ----------
