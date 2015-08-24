@@ -33,11 +33,12 @@
 	}
 	
 	#marquee { 
-		visibility: hidden;
+
 		width: 60%;
 		position: absolute;
 		top: 10%;
-		left: 20%;
+		/* left: 20%; */
+		left: -3000px;
 		padding: 40px;
 		z-index: -1;
 		background-color: #000;

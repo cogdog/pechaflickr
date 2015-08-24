@@ -119,7 +119,7 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 				if (index == (<?php echo $slidecount?> + 1)) {
 					$("body").vegas( 'pause' );
 					$('.caption').html('DONE!');
-        			$("#marquee").css("visibility","visible");
+        			$("#marquee").css("left","20%");
         			$(".vegas-slide").css("opacity","0.2");
 				}
 			}
