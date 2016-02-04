@@ -1,21 +1,21 @@
 <?php
 /*
 Pecha Flickr: pecha.php
-version 0.53 (January 17, 2011)
 
 by Alan Levine, cogdogblog@gmail.com
 see it at http://pechaflickr.net/
 
-This script generates the actual slide show using the jQuery cycle plugin
-http://jquery.malsup.com/cycle/
+This script generates the actual slide show using the jQuery Vegas plugin
+http://vegas.jaysalvat.com/
 
 Images are retrieved from flickr using phpflickr http://www.phpflickr.com/
 
 It expects to be passed 
-	the tag to look for (variable 'tag')
+	the tag to look for (variable 'tag' received as a str_rot13 value
 	number of slides to present (variable 'n')
 	time interval between slides (variable 'i')
 	flag for pulling from unique owners  (variable 'u' = true or false)
+	flag for special "heather" moder where the tag is a mystery  (variable 'h' = true or false)
 
 */ 
 
@@ -28,10 +28,36 @@ require_once('config.php'); 	// configuration stuff
 if (FLICKRKEY == 'XXXXWONTWORKWITHOUTYOUROWNKEYXXXXX') die ('There is no pechaflickr without a valid flickr API key. Check the configuration file.');
 
 // set up params from input URL
-$flickr_tag = (isset($_REQUEST['tag'])) ? $_REQUEST['tag'] : 'dog';
 $slidecount = (is_numeric($_REQUEST['n'])) ? $_REQUEST['n'] : 20;
+$flickr_tag = (isset($_REQUEST['t'])) ? str_rot13( substr( $_REQUEST['t'], $slidecount  ) ) : 'dog';
 $interval = (is_numeric($_REQUEST['i'])) ? $_REQUEST['i'] : 20;
-$unique = ($_REQUEST['u'] == true) ? true : false;
+$unique = (isset($_REQUEST['u']) and $_REQUEST['u'] == 'true') ? true : false;
+$heathermode = ( isset($_REQUEST['h']) and $_REQUEST['h'] == 'true') ? true : false;
+
+if ($heathermode) {
+	// in this special case, we do not display the tag, but ask players to guess what it is 
+	// named for Alaska teacher Heather M who suggested this idea!
+	
+	$pretty_title = 'pechaflicker guess the tag';
+	$tags_label = ' -- you have to guess their common tag -- ';
+
+} else {
+
+	// regular pecha flickr mode, always fun, the classic
+	$pretty_title = 'pechaflickr for ' . $flickr_tag;
+	$tags_label = ' tagged <a href="http://flickr.com/photos/tags/' . $flickr_tag . '" target="_blank">' .  $flickr_tag . '</a> ';
+}
+
+function GetBasePath() { 
+	// get the director path for the current script
+	// h/t ----- http://stackoverflow.com/a/15110424/2418186
+	$url  = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+	$url .= $_SERVER['SERVER_NAME'];
+	$url .= $_SERVER['REQUEST_URI'];
+
+	return dirname( $url );
+}
+
 
 
 function sec2hms ($sec )
@@ -65,7 +91,6 @@ function sec2hms ($sec )
 $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 
 
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -79,23 +104,23 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 
 	<link rel="stylesheet" href="css/pecha.css" media="screen">	
 	
-	
 	<?php if ($photos != -1):?>
 	
 	<!-- Vegas styles, baby -->
 	<link rel="stylesheet" href="css/vegas.min.css">
 	
-	<!--  jQuery library -->
+	<!--  Give us jQuery or give us dull web pages -->
 	<script src="http://code.jquery.com/jquery.min.js"></script>
 	
-	<!--  Vegas plugin -->
+	<!--  Set up Vegas  -->
 	<script src="js/vegas.min.js"></script>
 	
-	<!--  initialize when  DOM sez "Ready Boss" -->
+	<!--  start the magic when DOM sez "Ready Boss" -->
 	<script type="text/javascript">	
 	
 	$(document).ready(function() {
 
+		// let's go to vegas! run the slide show
 		$("body").vegas({
 			delay: <?php echo $interval * 1000?>,
 			slides: [
@@ -114,22 +139,32 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 			],
 			
 			walk: function (index, slideSettings) {
+				// each slide update the current slide count
 				$('.caption').html(index + ' / <?php echo $slidecount?>');
 			
+				// STOP THE VEGAS SHOW! We are done
 				if (index == (<?php echo $slidecount?> + 1)) {
 					$("body").vegas( 'pause' );
-					$('.caption').html('DONE!');
         			$("#marquee").css("left","20%");
+        			$("#stripe").css("display", 'none');
         			$(".vegas-slide").css("opacity","0.2");
 				}
 			}
 		});	
+		
+		
+		// For heather mode, show the hidden tag display box, and hide the pechaflickr feedback at bottom
+		$("#showTag").on('click',function() {
+			$("#tagbox").css("top",0);
+		});
+		
+		
 	});
 	</script>
 	
 	<?php endif?>
 	
-	<title>pechaflickr for <?php echo $flickr_tag?></title>
+	<title><?php echo $pretty_title?></title>
 
 </head>
 <body>
@@ -158,42 +193,69 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 	<span class="caption"></span>
 
 	<!-- displays parameters for this round -->	
-	<span id="stats"><?php echo $slidecount?> flickr photos tagged <a href="http://flickr.com/photos/tags/<?php echo $flickr_tag?>" target="_blank"><?php echo $flickr_tag?></a> displayed for <?php echo $interval?> seconds each (total run time: <?php echo sec2hms($slidecount * $interval) ?>)
-	</span>
+	<span id="stats"><?php echo $slidecount?> flickr photos <?php echo $tags_label?> displayed for <?php echo $interval?> seconds each (total run time: <?php echo sec2hms($slidecount * $interval) ?>)
+	</span>	
+	
 </div>
 
 <!-- hidden div for the final list of photos -->
 <div id="marquee">
-<h1>Your <span class="pf">pecha<span class="blue">flick</span><span class="pink">r</span></span> Experience</h1>
-<p>Congratulations! You improvised a story based on <strong><?php echo $slidecount?></strong> random flickr photos tagged <strong><?php echo $flickr_tag?></strong> displayed every <strong><?php echo $interval?></strong> seconds, using the following images. <br />
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://pechaflickr.net/index.php?t=<?php echo $flickr_tag?>&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random flickr images tagged &quot;<?php echo $flickr_tag?>&quot;" data-via="cogdog" data-size="large">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	<h1>Your <span class="pf">pecha<span class="blue">flick</span><span class="pink">r</span></span> Experience</h1>
 
-</p>
 
-<?php 
-	// holder for the list of links
-	$list_str = '';
-	
-	// cycle through the photos
-	for ($i=0; $i< $slidecount; $i++) {
-		// output the small size image
-		echo '<a href="' . $photos['url'][$i] . '"><img src="' . $photos['icon'][$i] . '" /></a> ';
+	<?php if ($heathermode) :?>
+		<p>You have just seen <strong><?php echo $slidecount?></strong> random flickr photos each displayed every <strong><?php echo $interval?></strong> seconds. Now comes your challenge...</p>
+
+		<p class="pf pink">What do you think is the common tag for all of the pictures that you saw? <br />
+
+
+
+		<p><a href="#" class="myButton centertext" id="showTag">I give up. Tell me what the tag is!</a></p>
 		
-		// store the list credit
-		$list_str .= '<li><a href="' . $photos['url'][$i] . '">' . $photos['url'][$i] . "</a></li>\n";
-	}
-?>
+		<div id="tagbox">The common tag for all of these photos is <strong><span class="pink"><big><?php echo strtoupper($flickr_tag)?></span></big></strong> How did you do? Let the world know through twitter...</div>
 
-<ol>
-<?php echo $list_str?>
-</ol>
+		<p><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo GetBasePath()?>/heather.php?t=<?php echo $_REQUEST['t']?>&h=1&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random flickr images and tried to guess the tag." data-via="cogdog" data-size="large">Tweet</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		</p>
 
-<a href="#" onClick="window.close()" class="myButton">let's  pechaflickr again!</a>
-</div>
+
+	<?php else:?>
+	
+		<!-- regular pechaflickr feedback -->
+		<p>Congratulations! You experienced <strong><?php echo $slidecount?></strong> random flickr photos tagged <strong><?php echo $flickr_tag?></strong> displayed every <strong><?php echo $interval?></strong> seconds, using the following images. If this was utterly fantastic, please let the world know... <br /><br />
+		
+		<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo GetBasePath()?>/index.php?t=<?php echo $_REQUEST['t']?>&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random flickr images tagged &quot;<?php echo $flickr_tag?>&quot;" data-via="cogdog" data-size="large">Tweet</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		</p>
+		<!-- end regular pechaflickr feedback -->
+		
+	<?php endif?>
+
+	<?php 
+		// holder for the list of links
+		$list_str = '';
+	
+		// cycle through the photos and build a list of the flickr to show at the end
+		for ($i=0; $i< $slidecount; $i++) {
+			// output the small size image
+			echo '<a href="' . $photos['url'][$i] . '"><img src="' . $photos['icon'][$i] . '" /></a> ';
+		
+			// store the list credit
+			$list_str .= '<li><a href="' . $photos['url'][$i] . '" target="_blank">' . $photos['url'][$i] . "</a></li>\n";
+		}
+	?>
+
+	<ol>
+	<?php echo $list_str?>
+	</ol>
+
+	<!-- the closer -->
+	<a href="#" onClick="window.close()" class="myButton">let's  pechaflickr again!</a>
+</div><!-- end marquee -->
+
+
+
 <?php endif?>
-
-<?php include 'footer.php'?>
 
 </body>
 </html>

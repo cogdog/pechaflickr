@@ -4,79 +4,8 @@
 	<meta charset="utf-8" />
 	<title>pechaflickr notes</title>
 	
-	<style type="text/css" title="text/css">
-		body
-		{
-			background-color: #fff;
-			margin: 0;
-			padding: 0;
-			font-family: arial;
-		}
-		
-		#wrapper
-		{
-			width: 600px;
-			margin: 150px auto 100px;
-			text-align: center;
-		}
-		
-		li 
-		{
-			text-align: left;
-		}
-		
-		input
-		{
-			padding: 4px 8px;
-			margin: 18px auto;
-			background-color: #eb47a0;
-			border: 2px solid #777;
-			color: #fff;
-			font-size: 30px;
-			font-weight: 800;
-			text-align: center;
-			display: block;
-			width: 100%;
-		}
-		
-		#play
-		{
-			background-color: #2f7bef;
-			width: 140px;
-			display: inline;
-		}
-		
-		#snum {
-			width: 80px;
-			display: inline;
-		
-		}
-		
-		p
-		{
-			font-size: 20px;
-			line-height: 24px;
-			text-align: left;
-			color: #666;
-		}
-		
-		.credit
-		{
-			font-size: 14px;
-			text-align: center;
-			margin-top: 80px;
-		}
-		
-		a, a:link, a:visited
-		{
-			color: #666;
-			text-decoration: none;
-			font-weight:bold; 
-			
-		}
-		
-		a:hover { color: #eb47a0; }
-</style>
+	<link rel="stylesheet" href="css/style.css" media="screen">
+
 
 </head>
 <body>
@@ -86,22 +15,57 @@
 <img src="images/pecha-flickr.jpg" alt="pecha flickr" class="banner" width="530" height="114" />
 
 
-<p>The idea for pechaflickr came completely from <a href="http://gforsythe.ca/">Giulia Forsythe</a> who asked if my <a href="http://5card.cogdogblog.com/">Five Card Flickr</a> could do this (no, but  <a href="http://www.phpflickr.com/">phpflickr</a> and the useful <a href="http://jquery.malsup.com/cycle/">jQuery Cycle</a> made it not too hard).</p>
+<p>The idea for pechaflickr came from <a href="http://gforsythe.ca/">Giulia Forsythe</a> who asked if my <a href="http://5card.cogdogblog.com/">Five Card Flickr</a> could do this (no, but  <a href="http://www.phpflickr.com/">phpflickr</a> and the useful <a href="http://jquery.malsup.com/cycle/">jQuery Cycle</a> made it not too hard).</p>
 
 <p>You can download the code and run it on your own web site; see <a href="https://github.com/cogdog/pechaflickr">github.com/cogdog/pechaflickr</a>
 
-<p><strong>To Maybe Be Done Someday</strong></p>
+<hr />
+
+<h2>Questions, Some Answers</h2>
+
+<blockquote class="pink"><strong>I am a 5th grade teacher and my kids absolutely love pechaflikr.  They have found a whole new way to look at vocabulary words. <br /><br />
+
+Occasionally though, inappropriate pictures come up with our vocab words.  Yesterday, our word was "era" and a Victoria Secret model came up in her bra and panties.  <br /><br />
+
+Is there a way we can use this wonderful fun game and censor some of the random pictures that may be inappropriate?</strong></blockquote>
+
+
+<p>I understand your concern about the potential for inappropriate photos to come up. Pechflickr use the flickr search mechanism that uses <a href="https://info.yahoo.com/safely/us/yahoo/flickr">only images marked as "safe" according to flickr</a>; however this is completely dependent on the person who posts the photos to follow these guidelines. </p>
+
+<p>You can report a photo that is in appropriate as detailed at <a href="https://info.yahoo.com/safely/us/yahoo/flickr">https://info.yahoo.com/safely/us/yahoo/flickr</a> but that's really an after the fact act. 
+
+<p>
+So to answer you, I cannot censor the photos that come in. 
+</p>
+
+<p>
+If you want to make completely sure that you have a safe set of images what I can suggest is to make you own pool (see the next question!)
+</p>
+
+<hr />
+
+<blockquote class="pink"><strong>Can I use pechaflickr to use only my own photos?</strong></blockquote>
+
+
+<p>Certainly, if you use a tag that is unique to your photos. The way pechaflickr looks for random photos requires four times as many as the desired number for a round; so if you want to show 20 photos in a round of pechaflickr, you will need at least 80 photos that use the tag. You should also open the Advance options and uncheck the option for <code>Unique Photo Owners (More variability)</code> (this allows it to pick more than one photo from the same person).
+
+<hr />
+
+
+<h2>Stuff To Maybe Be Do Some Nebulous Day</h2>
+
 <ul>
 <li>Create a way to save a series as a set to share or post with notes (a version as a wordpress template?)</li>
-<li>What do you want? Let me know <a href="http://cogdog.info">http://cogdog.info</a>
 </ul>
 
-<p><strong>History</strong></p>
+<hr />
+<h2>Pechaflickr History</h2>
+
 <ul>
 <li>5.1.2011 - [v 0.1] First version released</li>
 <li>5.11.2011 - Based on feedback, added the counter (I refuse to add a timer, that takes away the fun).</li>
 <li>7.11.2011 - On request of @kylemackie, added a field option to specify other numbers of slides for those wanting to do shorter (or longer) than standard 20 slide pecha kucha.</li>
-<li>7.13.2011 - [v 0.2] dded the flickr safe search option for results to try and reduce the fear of random naked body parts appearing (no guarantees). Source code posted to google <a href="http://code.google.com/p/pechaflickr/">http://code.google.com/p/pechaflickr/</a></l>
+<li>7.13.2011 - [v 0.2] added the flickr safe search option for results to try and reduce the fear of random naked body parts appearing (no guarantees). Source code posted to google <a href="http://code.google.com/p/pechaflickr/">http://code.google.com/p/pechaflickr/</a></l>
 <li>8.15.2011 - Revised code to hopefully address the bug of all images going to a white bar-  making sure only landscape orientation photos are fetched from flickr, and none that are too small in one dimension. All images displayed are now exactly sized to correct dimensions to fit the CSS div used for display.</li>
 <li>10.20.2011 - [v 0.3] Slide show options now moved to a <a href="advanced.html">separate page</a> to allow user selection of number of slides and duration between slides- an onscreen calculator shows the duration of the slideshow. <a href="index.html">Basic front page</a> offers standard 20x20 pecha kucha style.</li>
 <li>10.29.2011- [v 0.4] Tweaked flickr fetch to increase randomizing of photos, updated splash images to remove references to "20" slides.</li>
@@ -113,17 +77,16 @@
 <li>03.12.2014 - moving the code archive to github cause that's where the cool kids are.</li>
 <li>04.22.2014 - about time we had our own domain <a href="http://pechaflickr.net/">pechaflickr.net</a></li>
 <li>08.23.2015 - implemented <a href="http://vegas.jaysalvat.com/" target="_blank">vegas background slide show library</a> for full screen and responsive display of images, moved status to bottom of screen</li>
+<li>02.01.2016 - added option for "heather" to present random photos without revealing the tag, as a game to guess the common tag. It is named for a teacher who suggested the idea to me (see<a href="http://cogdogblog.com/2016/02/new-wave-pechaflickr/"> A New Wave for Pechaflickr</a>). To make this work, the tag passed in the URL is now encoded with a <code>rot13_str()</code> function.</li>
+
 
 </ul> 
 
-<p><strong>What Are You Reading This Stuff For?</strong></p>
+<h2>What Are You Reading This Stuff For?</h2>
+
 <form id="pecha" method="post" action="index.php">
 <input type="submit" id="play" value="Go Play" />
 </form>
-
-<p class="credit"><a href="http://pechaflickr.net/">pechaflickr.net</a><br />pechaflickr is a cogdog production<br />
-<a href="http://cogdog.info">http://cogdog.info</a> •  <a href="http://twitter.com/cogdog">@cogdog</a>
-</div>
 
 
 <?php include 'footer.php'?>
