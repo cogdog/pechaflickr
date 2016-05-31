@@ -51,6 +51,11 @@ If you want to make completely sure that you have a safe set of images what I ca
 
 <hr />
 
+<h2>Random Assorted Comments / Tips</h2>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/cogdog">@cogdog</a> sixth grade students struggled not to say &quot;Um&quot; as they created a story about each dog. Rule #2 : give dog a very silly name.</p>&mdash; teresa (@renlibrarian) <a href="https://twitter.com/renlibrarian/status/737679042049155072">May 31, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
 <h2>Stuff To Maybe Be Do Some Nebulous Day</h2>
 
