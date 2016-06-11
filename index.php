@@ -1,8 +1,8 @@
 <?php
 // seek ye predefined variables
 
-$tag = isset( $_GET['t'] ) ? $_GET['t'] : 'dog'; 	// tag
 $snum = isset( $_GET['s'] ) ? $_GET['s'] : 20;		// number of slides
+$tag = isset( $_GET['t'] ) ? str_rot13( substr( $_GET['t'], $snum  ) ) : 'dog'; // coded tag
 $inter = isset( $_GET['i'] ) ? $_GET['i'] : 20;		// time interval
 
 // check box for user setting
