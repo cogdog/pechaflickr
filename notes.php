@@ -15,7 +15,8 @@
 <img src="images/pecha-flickr.jpg" alt="pecha flickr" class="banner" width="530" height="114" />
 
 
-<p>The idea for pechaflickr came from <a href="http://gforsythe.ca/">Giulia Forsythe</a> who asked if my <a href="http://5card.cogdogblog.com/">Five Card Flickr</a> could do this (no, but  <a href="http://www.phpflickr.com/">phpflickr</a> and the useful <a href="http://jquery.malsup.com/cycle/">jQuery Cycle</a> made it not too hard).</p>
+<p>The idea for pechaflickr came from someone who used my <a href="http://5card.cogdogblog.com/">Five Card Flickr</a> and asked if it could do a spontaneous pecha kucha type presentation. With some digging inti  <a href="http://www.phpflickr.com/">phpflickr</a> and the useful <a href="http://jquery.malsup.com/cycle/">jQuery Cycle</a> I as able to conjure this site).</p>
+
 
 <p>You can download the code and run it on your own web site; see <a href="https://github.com/cogdog/pechaflickr">github.com/cogdog/pechaflickr</a>
 
