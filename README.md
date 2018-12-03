@@ -1,5 +1,14 @@
 # pechaflickr
-by Alan Levine @cogdog =|= http://cog.dog/ =|= http://cogdogblog.com/
+by Alan Levine http://cog.dog/ or http://cogdogblog.com/
+
+A Wordpress-theme *SPLOT* for presenting the web way (on the web)
+
+-----
+*If this kind of stuff has any value to you, please consider supporting me so I can do more!*
+
+[![Support me on Patreon](http://cogdog.github.io/images/badge-patreon.png)](https://patreon.com/cogdog) [![Support me on via PayPal](http://cogdog.github.io/images/badge-paypal.png)](https://paypal.me/cogdog)
+
+----- 
 
 ![](images/pecha-flickr.jpg "pechaflickr")
 
@@ -22,6 +31,13 @@ You will need a web server or a local running server PHP and to get a flickr API
 3. Edit config.php to enter the string for the API key
 4. Play and have fun
 
+## Going Worldwide
+
+Other versions of pechaflickr:
+
+* http://pechaflickr.de German version by [Nele Hirsch](https://ebildungslabor.de/)
+
+## Tell Me
 If you have used pechaflickr in any way, I'm interested in knowing about it!  Leave me some feedback at http://bit.ly/pechaflickr-survey
 
 
