@@ -1,7 +1,7 @@
 # pechaflickr
 by Alan Levine http://cog.dog/ or http://cogdogblog.com/
 
-A Wordpress-theme *SPLOT* for presenting the web way (on the web)
+The fun improv game that mashes up pecha kucha, powerpoint karoke, with random  photos from flickr-- seen at http://pechaflickr.net/
 
 -----
 *If this kind of stuff has any value to you, please consider supporting me so I can do more!*
@@ -13,8 +13,6 @@ A Wordpress-theme *SPLOT* for presenting the web way (on the web)
 ![](images/pecha-flickr.jpg "pechaflickr")
 
 ## What the heck is pechaflickr?
-
-Install your own version of the fun family game that mashes up pecha kucha, powerpoint karoke, with random  photos from flickr-- seen at http://pechaflickr.net/
 
 Huh? Give pechaflickr a tag to find flickr photos, how many you want, how long you want each slide on the screen, and see what kind of improv you and your friends can do.
 
