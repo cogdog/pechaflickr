@@ -21,7 +21,7 @@ $heathermode = ( isset($_REQUEST['h']) and $_REQUEST['h'] == 1) ? 'true' : 'fals
 	<title>pechaflickr (heather mode)</title>
 	
 	<!--  get some jQuery  -->
-	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery.min.js"></script>
 	
 	<link rel="stylesheet" href="css/style.css" media="screen">
 	

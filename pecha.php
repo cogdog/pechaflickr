@@ -110,7 +110,7 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 	<link rel="stylesheet" href="css/vegas.min.css">
 	
 	<!--  Give us jQuery or give us dull web pages -->
-	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery.min.js"></script>
 	
 	<!--  Set up Vegas  -->
 	<script src="js/vegas.min.js"></script>

@@ -19,7 +19,7 @@ $hbox = ( $_GET['h'] == 'y' ) ? 'checked="checked"' : '';
 	<title>pechaflickr</title>
 	
 	<!--  get some jQuery  -->
-	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery.min.js"></script>
 	
 	<link rel="stylesheet" href="css/style.css" media="screen">
 	
@@ -195,9 +195,14 @@ $hbox = ( $_GET['h'] == 'y' ) ? 'checked="checked"' : '';
 <p>Curious? <a href="http://cogdogblog.com/stuff/techtalks13/">I used pechaflickr to talk about pechaflickr.</a> If you are making use of this, <a href="http://bit.ly/pechaflickr-survey">please share with me</a>!</p>
 
 <div class="aligncenter">
-<a class="twitter-timeline" data-dnt="true" width="700" data-tweet-limit="20"  href="https://twitter.com/search?q=pechaflickr" data-widget-id="598707891965571073">Tweets about pechaflickr</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<h2>Tweets About Pechaflickr (<a href="https://twitter.com/search?q=pechaflickr&f=live" target="_blank">go</a>)</h2>
+
+<iframe style="border:0; width:100%;max-width:600px;height:500px" src="https://hawksey.info/tagsexplorer/widget/?q=SELECT%20B%2C%20A%2C%20C%2C%20E%2C%20COUNT(A)%20%20GROUP%20BY%20B%2C%20A%2C%20C%2C%20E%20ORDER%20BY%20E%20DESC%20LIMIT%2010&d=1jDgB1sCNMBgLkWQkW5X4_LvWwnzAevhjlbfWIeJ5kak&sheet=Archive&theme=light&linkColor=%231c94e0&widgetHeight=500&excludeTracking=true&excludeThread=true&includeRT=true&includeMedia=true" ></iframe>
+
+
 </div>
+
 
 <?php include 'footer.php'?>
 </body>
