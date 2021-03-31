@@ -1,12 +1,19 @@
 <?php
+
+// configuration stuff
+require_once('config.php');
+
 // seek ye predefined variables
 
 $snum = isset( $_GET['s'] ) ? $_GET['s'] : 20;		// number of slides
 $tag = isset( $_GET['t'] ) ? str_rot13( substr( $_GET['t'], $snum  ) ) : 'dog'; // coded tag
 $inter = isset( $_GET['i'] ) ? $_GET['i'] : 20;		// time interval
 
-// check box for user setting
+// check box for unique user setting
 $cbox =  ( !isset ( $_GET['u'] ) or $_GET['u'] == 1 ) ? 'checked="checked"' : '';
+
+// check box for flickr commons
+$commonsbox =  ( $_GET['c'] == 1 ) ? 'checked="checked"' : '';
 
 // "heather" mode for hiding tags
 $hbox = ( $_GET['h'] == 'y' ) ? 'checked="checked"' : '';
@@ -17,129 +24,16 @@ $hbox = ( $_GET['h'] == 'y' ) ? 'checked="checked"' : '';
 <head>
 	<meta charset="utf-8" />
 	<title>pechaflickr</title>
+	<?php include 'header-meta.php'?>
+
+	<link rel="stylesheet" href="css/style.css" media="screen">
 	
 	<!--  get some jQuery  -->
 	<script src="https://code.jquery.com/jquery.min.js"></script>
 	
-	<link rel="stylesheet" href="css/style.css" media="screen">
+	<!--  pecha scripts  -->
+	<script src="js/pechaflickr.js"></script>
 	
-	<script>
-	$(document).ready(function(){
-	
-		calctime(); 
-		makego();
-		
-		$(".toClick").click(function () {
-			var wasClicked = $(this);
-			var tdisp = document.getElementById("show_label");
-	
-			if($(wasClicked).attr("src") == 'images/tri-right.png') {
-				tdisp.innerHTML = "Hide Advanced Options";	
-				$(wasClicked).attr("src","images/tri-down.png");
-	
-			} else {
-	
-				$(wasClicked).attr("src","images/tri-right.png");
-				tdisp.innerHTML = "Show Advanced Options";
-			}
-		$(this).siblings(".revealMenu").toggle();
-		});
-	});
-	</script>
-
-	
-<script type="text/javascript" language="JavaScript">
-	function calctime() {
-		var totaltime = document.getElementById('snum').value * document.getElementById('inter').value;
-	
-		var s = totaltime % 60;
-		var m = Math.floor((totaltime % 3600 ) /60);
-		
-		var secstring = s<10 ? "0"+s : s;
-	
-		var disp = document.getElementById("runtime");
-		
-		disp.innerHTML = m+":"+secstring;
-	}
-	
-	function remove_qs(url) {
-		//removes query strong from  url
-		// thx stackoverflow http://stackoverflow.com/questions/11543398/jquery-how-to-remove-query-string-from-a-link
-		var a = document.createElement('a'); // dummy element
-		a.href = url;   // set full url
-		a.search = "";  // blank out query string
-		return a.href;
-	}
-
-
-	function makego() {
-	// build the link for the go launcher url
-	
-		// get main pechaflickr URL 
-		var purl = remove_qs(window.location.href);
-
-		// get params from current form values, t=tag, s= slide #; i = interval
-		var s = document.getElementById('snum').value;
-		var i = document.getElementById('inter').value;
-		
-		// prefix a coded version of the tag with a random string of chars of length = s
-		var t = ran_string(s) + str_rot13(document.getElementById('ptag').value);
-
-	
-		// unique setting
-		if (document.getElementById('cbox').checked) {
-			var u = 1;
-		} else {
-			var u = 0;
-		}
-
-		//heather mode setting
-		if (document.getElementById('hbox').checked) {
-			var hmode = '&h=1';
-			
-			if ( purl.indexOf('index.php') > -1 ) {
-				purl = purl.replace('index.php', 'heather.php'); 
-			} else {
-				purl += 'heather.php';
-			}
-			
-		}  else {
-			hmode = '';
-		}
-		
-		// update display field
-		document.getElementById('pgo').value = purl + '?t=' + t + hmode + '&s=' + s + '&i=' + i + '&u=' + u;
-	}
-
-
-	function ran_string( len ) {
-		// create a random string of chars of length = len
-		// h/t http://stackoverflow.com/a/22028809/2418186	
-		var outStr = "", newStr;
-		while (outStr.length < len) {
-			newStr = Math.random().toString(36).slice(2);
-			outStr += newStr.slice(0, Math.min(newStr.length, (len - outStr.length)));
-		}
-		return outStr;
-	}
-
-	
-	function str_rot13(str) {
-	  // discuss at: http://phpjs.org/functions/str_rot13/
-	  // original by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
-	  // improved by: Ates Goral (http://magnetiq.com)
-	  // improved by: Rafał Kukawski (http://blog.kukawski.pl)
-	  // bugfixed by: Onno Marsman
-
-	  return (str + '')
-		.replace(/[a-z]/gi, function(s) {
-		  return String.fromCharCode(s.charCodeAt(0) + (s.toLowerCase() < 'n' ? 13 : -13));
-		});
-
-		
-	}
-</script>
-
 </head>
 <body>
 
@@ -157,7 +51,6 @@ $hbox = ( $_GET['h'] == 'y' ) ? 'checked="checked"' : '';
 	<div class="revealMenu" style="display: none;">
 	<input name="num" type="text" size="4" value="<?php echo $snum?>" id="snum" onChange="calctime(); makego()" /> slides 
 
-
 	<select name="interval" id="inter" onChange="calctime(); makego()">
 
 	<?php
@@ -174,6 +67,8 @@ $hbox = ( $_GET['h'] == 'y' ) ? 'checked="checked"' : '';
 	<span id="runtime">6:40</span> total run time<br />
 
 	<input type="checkbox" id="cbox" name="unique" value="on" <?php echo $cbox?> onChange="makego()"  /> Unique Photo Owners (More variability)<br />
+	
+	<input type="checkbox" id="commonsbox" name="commons" value="off" <?php echo $commonsbox?> onChange="makego()"  /> Flickr Commons Only<br />
 
 	<input type="checkbox" id="hbox" name="heathermode" value="off" <?php echo $hbox?> onChange="makego()"  /> Heather Mode (Hide tags for users to guess from photos)<br />
 
@@ -181,16 +76,16 @@ $hbox = ( $_GET['h'] == 'y' ) ? 'checked="checked"' : '';
 	<input type="text" size="80" id="pgo" title="share url" onClick="this.select()" >
 	</div>
 
-	<input value="play" type="button" id="play" onClick="if (document.getElementById('ptag').value == '') {alert('This wont work unless you type in a tag!') } else if (document.getElementById('snum').value < 1 || document.getElementById('snum').value > 50) {alert('Number of slides must be between 1 and 50.') } else  {window.open('pecha.php?n=' + document.getElementById('snum').value  + '&h=' + document.getElementById('hbox').checked +  '&t=' + ran_string(document.getElementById('snum').value) + str_rot13(document.getElementById('ptag').value) + '&i=' + document.getElementById('inter').value + '&u=' + document.getElementById('cbox').checked , 'pecha', 'fullscreen=yes')}" />
+	<input value="play" type="button" id="play" onClick="if (document.getElementById('ptag').value == '') {alert('This wont work unless you type in a tag!') } else if (document.getElementById('snum').value < 1 || document.getElementById('snum').value > 50) {alert('Number of slides must be between 1 and 50.') } else  {window.open('pecha.php?n=' + document.getElementById('snum').value  + '&h=' + document.getElementById('hbox').checked + '&c=' + document.getElementById('commonsbox').checked +  '&t=' + ran_string(document.getElementById('snum').value) + str_rot13(document.getElementById('ptag').value) + '&i=' + document.getElementById('inter').value + '&u=' + document.getElementById('cbox').checked , 'pecha', 'fullscreen=yes')}" />
 	
 
 </form>
 
 <p><em>pechaflickr = the sound of random flickring</em></p>
 
-<p>Can you improv a coherent presentation from images you have never seen?</p>
+<p>Can you improv a coherent presentation from images you have never seen? Pechaflickr is a mashup of <a href="https://www.pechakucha.com/" target="_blank">pechakucha</a> and <a href="https://www.powerpointkaraoke.com/" target="_blank">powerpoint karaoke</a> created by <a href="https://cog.dog" target="_blank">Alan Levine</a>.</p>
 
-<p>Enter a tag, press play, and see how well you can communicate a coherent message illustrated by 20 random photos, each one on screen for 20 seconds. Advanced options let you change the number of images and/or the timing.</p>
+<p>Enter a tag, press play, and see how well you can communicate a coherent message illustrated by 20 random flickr photos, each one on screen for 20 seconds. Advanced options let you change the number of images and/or the timing as well as use images just from the <a href="http://flickr.com/commons" target="_blank">Flickr Commons</a>.</p>
 
 <p>Curious? <a href="http://cogdogblog.com/stuff/techtalks13/">I used pechaflickr to talk about pechaflickr.</a> If you are making use of this, <a href="http://bit.ly/pechaflickr-survey">please share with me</a>!</p>
 

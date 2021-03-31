@@ -33,19 +33,41 @@ $flickr_tag = (isset($_REQUEST['t'])) ? str_rot13( substr( $_REQUEST['t'], $slid
 $interval = (is_numeric($_REQUEST['i'])) ? $_REQUEST['i'] : 20;
 $unique = (isset($_REQUEST['u']) and $_REQUEST['u'] == 'true') ? true : false;
 $heathermode = ( isset($_REQUEST['h']) and $_REQUEST['h'] == 'true') ? true : false;
+$commons = ( isset($_REQUEST['c']) and $_REQUEST['c'] == 'true') ? true : false;
 
-if ($heathermode) {
+if ( $heathermode ) {
 	// in this special case, we do not display the tag, but ask players to guess what it is 
 	// named for Alaska teacher Heather M who suggested this idea!
 	
-	$pretty_title = 'pechaflicker guess the tag';
-	$tags_label = ' -- you have to guess their common tag -- ';
+	
+	if ( $commons ) {
+
+		$pretty_title = 'pechaflicker from the flickr commons, guess the tag';
+		$tags_label = ' from the flickr commons -- you have to guess the common tag -- ';
+		$bg_prefix = 'heather';
+
+	
+	} else {
+	
+		$pretty_title = 'pechaflicker guess the tag';
+		$tags_label = ' -- you have to guess their common tag -- ';
+		$bg_prefix = 'heather';
+	}
+	
+} elseif ( $commons ) {
+
+	// The flickr creative commons mode
+	
+	$pretty_title = 'pechaflickr from the flickr commons ' . $flickr_tag;
+	$tags_label = 'from the flickr commons tagged <a href="https://www.flickr.com/search/?text=' . $flickr_tag . '&is_commons=true&view_all=1" target="_blank">' .  $flickr_tag . '</a> ';
+	$bg_prefix = 'commons';
 
 } else {
 
 	// regular pecha flickr mode, always fun, the classic
 	$pretty_title = 'pechaflickr for ' . $flickr_tag;
-	$tags_label = ' tagged <a href="http://flickr.com/photos/tags/' . $flickr_tag . '" target="_blank">' .  $flickr_tag . '</a> ';
+	$tags_label = ' tagged <a href="https://flickr.com/photos/tags/' . $flickr_tag . '" target="_blank">' .  $flickr_tag . '</a> ';
+	$bg_prefix = 'splash';
 }
 
 function GetBasePath() { 
@@ -88,7 +110,7 @@ function sec2hms ($sec )
   }
   
 // go fetch the photos
-$photos =  load_pecha($flickr_tag, $slidecount, $unique);
+$photos =  load_pecha($flickr_tag, $slidecount, $unique, $commons);
 
 
 ?>
@@ -123,8 +145,11 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 		// let's go to vegas! run the slide show
 		$("body").vegas({
 			delay: <?php echo $interval * 1000?>,
+			loop: false,
+			transition: 'fade',
+			
 			slides: [
-				{src: "images/splash<?php echo rand(1,5)?>.jpg"}, 
+				{src: "images/<?php echo $bg_prefix . rand(1,5)?>.jpg"}, 
 				
 				<?php
 				// we just need to output the images as img tabs
@@ -163,6 +188,17 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 	</script>
 	
 	<?php endif?>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-29223978-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-29223978-1');
+</script>
 	
 	<title><?php echo $pretty_title?></title>
 
@@ -172,13 +208,18 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 
 
 <?php if ($photos == -1):?>
+	<div id="wrapper">
+		<div id="msg">
+			<h1 class="sorry">Ouch! Pechaflickr did not find enough photos tagged "<?php echo $flickr_tag?>" to make this work. Sometime a reload helps wake flickr up.</h1>
 	
-	<h1 class="sorry">We are sorry, but pechaflickr did not find enough flickr photos tagged <?php echo $flickr_tag?> to make this work.</h1>
-	<form><input type="button" value="try again?" onClick="window.close()"></form>
-	</div>
 	
-	<div id="logo">
-		<a href="http://pechaflickr.net/" target="_pecha"><img src="images/pecha-flickr-bk.png" alt="pecha-flickr-bk" alt="pechaflickr" width="120" height="26" /></a>
+			<form id="retry"><input type="button" value="try again?" onClick="location.reload(true)"></form>
+	
+			
+				<a href="http://pechaflickr.net/" target="_pecha"><img src="images/pecha-flickr-bk.png" alt="pecha-flickr-bk" alt="pechaflickr" width="120" height="26" /></a>
+			
+	
+		</div>
 	</div>
 	
 	
@@ -204,7 +245,10 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 
 
 	<?php if ($heathermode) :?>
-		<p>You have just seen <strong><?php echo $slidecount?></strong> random flickr photos each displayed every <strong><?php echo $interval?></strong> seconds. Now comes your challenge...</p>
+	
+		<?php $commons_extra = ($commons) ? ' from the flickr commons ' : '';?>
+		
+		<p>You have just seen <strong><?php echo $slidecount?></strong> random flickr photos <?php echo $commons_extra?> each displayed every <strong><?php echo $interval?></strong> seconds. Now comes your challenge...</p>
 
 		<p class="pf pink">What do you think is the common tag for all of the pictures that you saw? <br />
 
@@ -212,13 +256,21 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 
 		<p><a href="#" class="myButton centertext" id="showTag">I give up. Tell me what the tag is!</a></p>
 		
-		<div id="tagbox">The common tag for all of these photos is <strong><span class="pink"><big><?php echo strtoupper($flickr_tag)?></span></big></strong> How did you do? Let the world know through twitter...</div>
+		<div id="tagbox">The common tag for all of these photos <?php echo $commons_extra?> is <strong><span class="pink"><big><?php echo strtoupper($flickr_tag)?></span></big></strong> How did you do? Let the world know through twitter...</div>
 
-		<p><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo GetBasePath()?>/heather.php?t=<?php echo $_REQUEST['t']?>&h=1&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random flickr images and tried to guess the tag." data-via="cogdog" data-size="large">Tweet</a>
+		<p><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo GetBasePath()?>/heather.php?t=<?php echo $_REQUEST['t']?>&h=1&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>&c=<?php echo $commons?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random flickr images and tried to guess the tag." data-via="cogdog" data-size="large">Tweet</a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 		</p>
 
-
+	<?php elseif ($commons) :?>
+	
+	<p>Fantastic! You explored from the Flickr Commons <strong><?php echo $slidecount?></strong> random openly licensed photos tagged <strong><?php echo $flickr_tag?></strong> displayed every <strong><?php echo $interval?></strong> seconds, using the following images. To celebrate your accomplishment and to share the love for the Flickr Commons, please share it widely... <br /><br />
+		
+		<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo GetBasePath()?>/index.php?t=<?php echo $_REQUEST['t']?>&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>&c=<?php echo $commons?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random images from the Flickr Commons tagged &quot;<?php echo $flickr_tag?>&quot;" data-via="cogdog" data-size="large">Tweet</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		</p>
+	
+	
 	<?php else:?>
 	
 		<!-- regular pechaflickr feedback -->
@@ -253,9 +305,22 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique);
 	<a href="#" onClick="window.close()" class="myButton">let's  pechaflickr again!</a>
 </div><!-- end marquee -->
 
-
-
 <?php endif?>
+
+	<?php if (GOOGLEKEY):?>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo GOOGLEKEY?>"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', '<?php echo GOOGLEKEY?>');
+	</script>
+
+	<!-- end Google's tracking eye -->
+	<?php endif?>
+
 
 </body>
 </html>

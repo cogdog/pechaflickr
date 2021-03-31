@@ -12,6 +12,7 @@ $flickr_tag = (isset($_REQUEST['t'])) ? $_REQUEST['t'] : ran_string($slidecount)
 $interval = (is_numeric($_REQUEST['i'])) ? $_REQUEST['i'] : 20;
 $unique = (isset($_REQUEST['u']) and $_REQUEST['u'] == 1) ? 'true' : 'false';
 $heathermode = ( isset($_REQUEST['h']) and $_REQUEST['h'] == 1) ? 'true' : 'false';
+$commons = ( isset($_REQUEST['c']) and $_REQUEST['c'] == '1') ? 1 : 0;
 
 ?>
 <!DOCTYPE html>
@@ -19,6 +20,8 @@ $heathermode = ( isset($_REQUEST['h']) and $_REQUEST['h'] == 1) ? 'true' : 'fals
 <head>
 	<meta charset="utf-8" />
 	<title>pechaflickr (heather mode)</title>
+
+	<?php include 'header-meta-heather.php'?>
 	
 	<!--  get some jQuery  -->
 	<script src="https://code.jquery.com/jquery.min.js"></script>
@@ -80,13 +83,7 @@ $heathermode = ( isset($_REQUEST['h']) and $_REQUEST['h'] == 1) ? 'true' : 'fals
 <p class="text-center">Can you guess the tag that is common to all the photos?</p>
 
 <form id="pecha">
-
-
-
-	<input value="play" type="button" id="play" onClick="window.open('pecha.php?n=<?php echo $slidecount?>&h=<?php echo $heathermode?>&t=<?php echo $flickr_tag?>&i=<?php echo $interval?>&u=<?php echo $unique?>' , 'pecha', 'fullscreen=yes')" />
-
-	
-
+	<input value="play" type="button" id="play" onClick="window.open('pecha.php?n=<?php echo $slidecount?>&h=<?php echo $heathermode?>&t=<?php echo $flickr_tag?>&i=<?php echo $interval?>&u=<?php echo $unique?>&c=<?php echo $commons?>' , 'pecha', 'fullscreen=yes')" />
 </form>
 
 

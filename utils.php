@@ -12,7 +12,7 @@ by Alan Levine, cogdogblog@gmail.com
 Use flickr API get a batch of images for a given tag.
 -------------- GET_FROM_FLICKR --------------------------------- */
 
-function get_from_flickr($tag, $cnt=100) {
+function get_from_flickr($tag, $cnt=100, $commons_only=false) {
 
 	require_once("phpFlickr.php");
 	$f = new phpFlickr(FLICKRKEY);
@@ -23,7 +23,7 @@ function get_from_flickr($tag, $cnt=100) {
 	
 	// get $cnt flickr photos for search on the tag, apply the flickr safe search filters
 	//     so we don't get any offending body parts in the batch	
-	$found = $f->photos_search(array("tags"=>$tag, "sort" => $sortof[rand(0,6)],  "per_page" => $cnt, "safe_search" => 1, "extras" => 'url_z'));
+	$found = $f->photos_search(array("tags"=>$tag, "sort" => $sortof[rand(0,6)],  "per_page" => $cnt, "safe_search" => 1, "extras" => 'url_z', "is_commons" => $commons_only ));
 	
 	return($found['photo'] );
 
@@ -31,19 +31,19 @@ function get_from_flickr($tag, $cnt=100) {
 
 /* ----------- LOAD_PECHA ---------------------------------
 Use flickr API get a batch of images for a given tag; we want more
-than we will need, so grab 400 total and return a random selection of
+than we will need, so grab 200 total and return a random selection of
 the number specified by $n
 -------------- LOAD_PECHA --------------------------------- */
 
 
-function load_pecha($tag, $n, $unique_owner=true, $size='z') {
+function load_pecha($tag, $n, $unique_owner=true, $commons_only=false, $size='z') {
 
-	// get 400 photos for tag
-	$pile = get_from_flickr($tag, 400);
+	// get  photos for tag
+	$pile = get_from_flickr($tag, 200, $commons_only);
 	
 	// error condition if we do not have sufficient photos; estimated
 	//   as 4 times the number requested
-	if (count($pile) < 4 * $n) return (-1);
+	if (count($pile) < 2 * $n) return (-1);
 	
 	// shuffle the photos like a deft card dealer
 	shuffle($pile);
@@ -62,8 +62,9 @@ function load_pecha($tag, $n, $unique_owner=true, $size='z') {
 						
 	// Generate the URLs and heights for the static version of each photo
 	// We will just walk the array til we get enough photos_search
+	// Do not use for flickr commons search
 	
-	if ($unique_owner) {
+	if ($unique_owner AND !$commons_only) {
 	
 		// make sure each photo is from different creator
 		for ($indx = 0; $indx < count($pile); $indx++) {

@@ -2,6 +2,16 @@
 <a href="https://cog.dog/">cog.dog</a> •  <a href="http://twitter.com/cogdog">@cogdog</a>
 </div> <!-- end wrapper -->
 
+<?php if (GOOGLEKEY):?>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo GOOGLEKEY?>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-<!-- anything else for the footer? e.g. google analytics or cat jokes -->
+  gtag('config', '<?php echo GOOGLEKEY?>');
+</script>
 
+<!-- end Google's tracking eye -->
+<?php endif?>
