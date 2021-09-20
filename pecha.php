@@ -29,7 +29,14 @@ if (FLICKRKEY == 'XXXXWONTWORKWITHOUTYOUROWNKEYXXXXX') die ('There is no pechafl
 
 // set up params from input URL
 $slidecount = (is_numeric($_REQUEST['n'])) ? $_REQUEST['n'] : 20;
-$flickr_tag = (isset($_REQUEST['t'])) ? str_rot13( substr( $_REQUEST['t'], $slidecount  ) ) : 'dog';
+
+// check for older URLs that used a tag variable
+if (isset($_REQUEST['tag']) ) {
+	$flickr_tag = $_REQUEST['tag'];
+} else {
+	// newer versions use encoded tag
+	$flickr_tag = (isset($_REQUEST['t'])) ? str_rot13( substr( $_REQUEST['t'], $slidecount  ) ) : 'dog';
+}
 $interval = (is_numeric($_REQUEST['i'])) ? $_REQUEST['i'] : 20;
 $unique = (isset($_REQUEST['u']) and $_REQUEST['u'] == 'true') ? true : false;
 $heathermode = ( isset($_REQUEST['h']) and $_REQUEST['h'] == 'true') ? true : false;
