@@ -27,12 +27,18 @@ $hbox = ( $_GET['h'] == 'y' ) ? 'checked="checked"' : '';
 	<?php include 'header-meta.php'?>
 
 	<link rel="stylesheet" href="css/style.css" media="screen">
-	
+
 	<!--  get some jQuery  -->
 	<script src="https://code.jquery.com/jquery.min.js"></script>
 	
+	<!--  mastodon timeline script  -->
+	<script src="js/mastodon-timeline.umd.js" defer></script>
+		
+
 	<!--  pecha scripts  -->
-	<script src="js/pechaflickr.js"></script>
+	<script src="js/pechaflickr.js" defer></script>
+	
+
 	
 </head>
 <body>
@@ -91,10 +97,24 @@ $hbox = ( $_GET['h'] == 'y' ) ? 'checked="checked"' : '';
 
 <div text-center="aligncenter">
 
-<h2>Tweets About Pechaflickr (<a href="https://twitter.com/search?q=pechaflickr&f=live" target="_blank">go</a>)</h2>
-<p class="text-center"><em><small>through Feb 2023 before twitter died to me</small></em></p>
+<h2>Mastodon Posts About Pechaflickr (<a href="https://mastodon.social/tags/pechaflickr" target="_blank">go</a>)</h2>
+<p class="text-center"><em><small>we ignore the birdspace, bye</small></em></p>
 
-<iframe style="border:0; width:100%;max-width:600px;height:500px" src="https://hawksey.info/tagsexplorer/widget/?q=SELECT%20B%2C%20A%2C%20C%2C%20E%2C%20COUNT(A)%20%20GROUP%20BY%20B%2C%20A%2C%20C%2C%20E%20ORDER%20BY%20E%20DESC%20LIMIT%2010&d=1jDgB1sCNMBgLkWQkW5X4_LvWwnzAevhjlbfWIeJ5kak&sheet=Archive&theme=light&linkColor=%231c94e0&widgetHeight=500&excludeTracking=true&excludeThread=true&includeRT=true&includeMedia=true" ></iframe>
+<!-- 
+Original repository:
+https://gitlab.com/idotj/mastodon-embed-timeline
+-->	
+
+
+<div class="dummy-wrapper-timeline">
+  <!-- Mastodon Timeline -->
+  <div id="mt-container" class="mt-container">
+    <div class="mt-body" role="feed">
+      <div class="mt-loading-spinner"></div>
+    </div>
+  </div>
+</div>
+
 
 
 </div>

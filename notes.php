@@ -18,7 +18,7 @@ require_once('config.php');
 <img src="images/pecha-flickr.jpg" alt="pecha flickr" class="banner" width="530" height="114" />
 
 
-<p>The idea for pechaflickr came from my <a href="http://5card.cogdogblog.com/">Five Card Flickr</a>. I was asked if it could do a spontaneous pecha kucha type presentation. With some duct taping of PHP and jQuery using  <a href="http://www.phpflickr.com/">phpflickr</a> and the <a href="http://vegas.jaysalvat.com/">Vegas Background Slideshow</a> I was able to conjure this site. </p>
+<p>The idea for pechaflickr came from my <a href="http://5card.cogdogblog.com/">Five Card Flickr</a>. I was asked if it could do a spontaneous pecha kucha type presentation. With some duct taping of PHP and jQuery using  <a href="https://www.phpflickr.com/">phpflickr</a> and the <a href="https://vegas.jaysalvat.com/">Vegas Background Slideshow</a> I was able to conjure this site. </p>
 
 
 <p>You can download the code and run it on your own web site; see <a href="https://github.com/cogdog/pechaflickr">github.com/cogdog/pechaflickr</a>
@@ -34,9 +34,9 @@ Occasionally though, inappropriate pictures come up with our vocab words.  Yeste
 Is there a way we can use this wonderful fun game and censor some of the random pictures that may be inappropriate?</strong></blockquote>
 
 
-<p>I understand your concern about the potential for inappropriate photos to come up. Pechflickr use the flickr search mechanism that uses <a href="https://info.yahoo.com/safely/us/yahoo/flickr">only images marked as "safe" according to flickr</a>; however this is completely dependent on the person who posts the photos to follow these guidelines. </p>
+<p>I understand your concern about the potential for inappropriate photos to come up. Pechflickr use the flickr search mechanism that uses only images marked as "safe" according to flickr; however this is completely dependent on the person who posts the photos to follow these guidelines. </p>
 
-<p>You can report a photo that is in appropriate as detailed at <a href="https://info.yahoo.com/safely/us/yahoo/flickr">https://info.yahoo.com/safely/us/yahoo/flickr</a> but that's really an after the fact act. 
+<p>You can report a photo that is in appropriate as detailed at <a href="https://blog.flickr.net/en/2021/03/19/heres-how-to-report-abuse-spam-and-other-inappropriate-content-on-flickr/">How to Report Inappropriate Content on Flickr</a> but that's really an after the fact act. 
 
 <p>
 So to answer you, I cannot censor the photos that come in. 
@@ -53,19 +53,12 @@ If you want to make completely sure that you have a safe set of images what I ca
 
 <p>Certainly, if you use a tag that is unique to your photos. The way pechaflickr looks for random photos requires four times as many as the desired number for a round; so if you want to show 20 photos in a round of pechaflickr, you will need at least 80 photos that use the tag. You should also open the Advance options and uncheck the option for <code>Unique Photo Owners (More variability)</code> (this allows it to pick more than one photo from the same person).
 
-<hr />
-
-<h2>Random Assorted Comments / Tips</h2>
-
-<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/cogdog">@cogdog</a> sixth grade students struggled not to say &quot;Um&quot; as they created a story about each dog. Rule #2 : give dog a very silly name.</p>&mdash; teresa (@renlibrarian) <a href="https://twitter.com/renlibrarian/status/737679042049155072">May 31, 2016</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
 
 <hr />
 <h2>Pechaflickr History</h2>
 
 <ul>
+<li>03.23.2023 - removing all shreds of twitter, not more widget, changed sharing to post to mastodon, updated opengraph tags to use random splash imsges
 <li>03.29.2021 - Four years later, still pechaflickring now with an option to use images from the <a href="https://flickr.com/commons" target="_blank">Flickr Commons</a>, just because we love these open licensed classic images.
 <li>03.16.2017 - Custom welcome images for "heather" mode, updated Vegas slideshow, clean up text on site.</li>
 <li>02.01.2016 - added option for "heather" to present random photos without revealing the tag, as a game to guess the common tag. It is named for a teacher who suggested the idea to me (see<a href="http://cogdogblog.com/2016/02/new-wave-pechaflickr/"> A New Wave for Pechaflickr</a>). To make this work, the tag passed in the URL is now encoded with a <code>rot13_str()</code> function.</li>

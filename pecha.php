@@ -263,33 +263,74 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique, $commons);
 
 		<p><a href="#" class="myButton centertext" id="showTag">I give up. Tell me what the tag is!</a></p>
 		
-		<div id="tagbox">The common tag for all of these photos <?php echo $commons_extra?> is <strong><span class="pink"><big><?php echo strtoupper($flickr_tag)?></span></big></strong> How did you do? Let the world know through twitter...</div>
-
-		<p><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo GetBasePath()?>/heather.php?t=<?php echo $_REQUEST['t']?>&h=1&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>&c=<?php echo $commons?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random flickr images and tried to guess the tag." data-via="cogdog" data-size="large">Tweet</a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</p>
-
+		<div id="tagbox">The common tag for all of these photos <?php echo $commons_extra?> is <strong><span class="pink"><big><?php echo strtoupper($flickr_tag)?></span></big></strong> How did you do? Let the world know through mastodon...</div>
+		
+		<?php
+			$toot_msg = 'I just did #pechaflickr with ' . $slidecount . ' random flickr photos' . $commons_extra . " in Heather mode where I tried to guess the tag.\n\nTry it yourself at " . GetBasePath() . '/heather.php?t=' .  $_REQUEST['t'] . '&h=1&s=' . $slidecount . '&i=' . $interval . '&u=' . $unique . '&c=' . $commons ;
+		
+		?>	
+		
+	<a href="#" 
+    target="mastodon" 
+    data-prompt="Please enter your Mastodon instance domain, e.g. mastodon.social" 
+    data-edittext="✏️" 
+    data-editlabel="Edit your Mastodon instance" 
+    data-poststr="<?php echo $toot_msg?>"
+    class="mastodon-share"
+    style= "padding: 0.2rem 0.6rem 0.3rem;background: #2b90d9;color: white;border-radius: 0.3rem;text-decoration: none;font-weight: bold;">
+    Share on Mastodon
+    </a>
+    <script src="js/mastodon.js"></script>
+	 </p>
+		
+	
 	<?php elseif ($commons) :?>
 	
 	<p>Fantastic! You explored from the Flickr Commons <strong><?php echo $slidecount?></strong> random openly licensed photos tagged <strong><?php echo $flickr_tag?></strong> displayed every <strong><?php echo $interval?></strong> seconds, using the following images. To celebrate your accomplishment and to share the love for the Flickr Commons, please share it widely... <br /><br />
-		
-		<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo GetBasePath()?>/index.php?t=<?php echo $_REQUEST['t']?>&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>&c=<?php echo $commons?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random images from the Flickr Commons tagged &quot;<?php echo $flickr_tag?>&quot;" data-via="cogdog" data-size="large">Tweet</a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</p>
 	
+	
+	<?php
+			$toot_msg ='I just did #pechaflickr with ' . $slidecount . ' random photos from the Flickr Commons tagged &quot;' .  $flickr_tag . "&quot;\n\nTry it yourself at " . GetBasePath() . '/index.php?t=' .  $_REQUEST['t'] . '&s=' . $slidecount . '&i=' . $interval . '&u=' . $unique . '&c=' . $commons ;
+		
+		?>
+		
+	<a href="#" 
+    target="mastodon" 
+    data-prompt="Please enter your Mastodon instance domain, e.g. mastodon.social" 
+    data-edittext="✏️" 
+    data-editlabel="Edit your Mastodon instance" 
+    data-poststr="<?php echo $toot_msg?>"
+    class="mastodon-share"
+    style= "padding: 0.2rem 0.6rem 0.3rem;background: #2b90d9;color: white;border-radius: 0.3rem;text-decoration: none;font-weight: bold;">
+    Share on Mastodon
+    </a>
+    <script src="js/mastodon.js"></script>
+	 </p>
 	
 	<?php else:?>
 	
 		<!-- regular pechaflickr feedback -->
 		<p>Congratulations! You experienced <strong><?php echo $slidecount?></strong> random flickr photos tagged <strong><?php echo $flickr_tag?></strong> displayed every <strong><?php echo $interval?></strong> seconds, using the following images. If this was utterly fantastic, please let the world know... <br /><br />
+		<?php
+			$toot_msg ='I just did #pechaflickr with ' . $slidecount . ' random flickr images tagged &quot;' .  $flickr_tag . "&quot;\n\nTry it yourself at " . GetBasePath() . '/index.php?t=' .  $_REQUEST['t'] . '&s=' . $slidecount . '&i=' . $interval . '&u=' . $unique;
 		
-		<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo GetBasePath()?>/index.php?t=<?php echo $_REQUEST['t']?>&s=<?php echo $slidecount?>&i=<?php echo $interval?>&u=<?php echo $unique?>" data-text="I just did #pechaflickr with <?php echo $slidecount?> random flickr images tagged &quot;<?php echo $flickr_tag?>&quot;" data-via="cogdog" data-size="large">Tweet</a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</p>
-		<!-- end regular pechaflickr feedback -->
+		?>
 		
-	<?php endif?>
+	<a href="#" 
+    target="mastodon" 
+    data-prompt="Please enter your Mastodon instance domain, e.g. mastodon.social" 
+    data-edittext="✏️" 
+    data-editlabel="Edit your Mastodon instance" 
+    data-poststr="<?php echo $toot_msg?>"
+    class="mastodon-share"
+    style= "padding: 0.2rem 0.6rem 0.3rem;background: #2b90d9;color: white;border-radius: 0.3rem;text-decoration: none;font-weight: bold;">
+    Share on Mastodon
+    </a>
+    <script src="js/mastodon.js"></script>
+    </p>
 
+	<?php endif?>
+	
 	<?php 
 		// holder for the list of links
 		$list_str = '';
@@ -327,7 +368,6 @@ $photos =  load_pecha($flickr_tag, $slidecount, $unique, $commons);
 
 	<!-- end Google's tracking eye -->
 	<?php endif?>
-
 
 </body>
 </html>
