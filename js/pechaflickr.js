@@ -112,3 +112,17 @@ $(document).ready(function(){
 	$(this).siblings(".revealMenu").toggle();
 	});
 });
+
+/* Mastodon embed timeline v4.3.7 */
+/* More info at: */
+/* https://gitlab.com/idotj/mastodon-embed-timeline */
+
+/* Main Javascript imported via CDN (check Pen JS settings) */ 
+
+const myTimeline = new MastodonTimeline.Init({
+  instanceUrl: "https://mastodon.social",
+  timelineType: "hashtag",
+  hashtagName: "pechaflickr",
+
+});
+
